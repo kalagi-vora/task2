@@ -1,0 +1,12 @@
+table{
+  width : 80%;
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
+  color:black;
+}
+
+a:hover{
+  box-shadow: 0 2px 0 rgb(120, 138, 141)
+}

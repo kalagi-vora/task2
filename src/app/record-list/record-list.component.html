@@ -1,0 +1,36 @@
+<div>
+<table class="table table-bordered">
+  <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Action</th>
+  </tr>
+  <tr *ngFor = "let record of allRecords">
+    <!--solve this-->
+    <td>
+      {{record.first_name}}
+    </td>
+    <td>
+      {{record.last_name}}
+    </td>
+    <td><a (click)="onClickEdit(record)">
+           Edit
+        </a> |
+        <a (click)="onClickDelete(record.id)">
+          Delete
+        </a>
+    </td>
+  </tr>
+</table>
+
+<nav aria-label="...">
+  <ul class="pagination pagination-sm">
+    <div *ngFor = "let page of pages">
+      <li class="page-item"><button class="page-link"
+          (click)="onPageClick(page)">
+          {{page}}</button>
+      </li>
+    </div>
+  </ul>
+</nav>
+</div>
