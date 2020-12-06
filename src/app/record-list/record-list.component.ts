@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {RecordsService} from '../records.service';
 import { Record } from '../record.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-record-list',
@@ -43,21 +44,24 @@ export class RecordListComponent implements OnInit {
 
   onClickEdit(data: Record){
     this.recordService.passData(data);
-    console.log(this.recordService.showData());
-    this.router.navigate([`../edit-record/${data.id}`], {queryParams: {allowEdit: '1'}});
+    console.log("in component:"+JSON.stringify(this.recordService.showData()));
+     this.router.navigate([`../recordlist/${data.id}`]);
   }
 
   onClickDelete(id: number){
-    this.recordService.deleteRecord(id).subscribe(() => {
-      console.log(`Delete Request for id:${id} is successful`);
 
-      for(let i = 0; i < this.allRecords.length; ++i){
-        if (+this.allRecords[i].id === id) {
-            this.allRecords.splice(i,1);
+    let user = this.allRecords[id-1].first_name;
+    if (confirm(`Are you sure to delete user ${user}?`)){
+      this.recordService.deleteRecord(id).subscribe(() => {
+        console.log(`Delete Request for id:${id} is successful`);
+
+        for(let i = 0; i < this.allRecords.length; ++i){
+          if (+this.allRecords[i].id === id) {
+              this.allRecords.splice(i,1);
+          }
         }
-      }
-
-    })
+      })
+    }
   }
 
 }

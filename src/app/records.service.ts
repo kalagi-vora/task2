@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Record } from './record.model';
+import {Record } from './record.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class RecordsService {
 
 
   updateRecord(firstName: string, lastName: string , id:number) {
-    const recordData: Record = { firstName: firstName, lastName: lastName , id: id};
+    const recordData: Record = { firstName: firstName, lastName: lastName};
     this.http
       .patch<{ data: string }>(
         `${this.apiUrl}/${id}`,
@@ -36,7 +36,7 @@ export class RecordsService {
       )
       .subscribe(
         responseData => {
-          console.log(responseData);
+          console.log("Edited data Is:" +JSON.stringify(responseData));
         }
       );
   }

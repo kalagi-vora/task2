@@ -14,7 +14,7 @@ export class AddRecordComponent implements OnInit{
 
   public recordForm: FormGroup;
   public dataOfRecord : Record;
-  public allowEdit = false;
+  public urlId = false;
 
   constructor(private recordService: RecordsService ,
               private route: ActivatedRoute,
@@ -25,25 +25,39 @@ export class AddRecordComponent implements OnInit{
 
     this.dataOfRecord = this.recordService.showData();
 
-    this.recordForm = new FormGroup({
-      'firstName': new FormControl(null,Validators.required),
-      'lastName': new FormControl(null,Validators.required)
-    })
-
-    this.route.queryParams
-      .subscribe(
-        (queryParams: Params) => {
-          this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
-        }
-      );
+    this.route.params.subscribe(
+      (params : Params)=>{
+        this.urlId = params['id']? true : false;
+        this.InitForm();
+      }
+    )
   }
+
+  InitForm()
+  {
+    let firstName:string ='';
+    let lastName : string ='';
+    if(this.urlId)
+    {
+      firstName = this.dataOfRecord.first_name;
+      lastName = this.dataOfRecord.last_name;
+    }
+    this.recordForm = new FormGroup({
+      'firstName': new FormControl(firstName,Validators.required),
+      'lastName': new FormControl(lastName,Validators.required)
+    })
+  }
+
 
   onCreateRecord(recordData: Record): void{
-    this.recordService.createRecord(recordData.firstName, recordData.lastName);
-  }
-
-  onUpdateRecord(recordData: Record): void{
-    this.recordService.updateRecord(recordData.firstName, recordData.lastName ,recordData.id = this.dataOfRecord.id);
+    if(this.urlId)
+    {
+      this.recordService.updateRecord(recordData.firstName, recordData.lastName ,recordData.id = this.dataOfRecord.id);
+    }
+    else{
+      this.recordService.createRecord(recordData.firstName, recordData.lastName);
+    }
+    this.router.navigate(['../recordlist']);
   }
 
 }

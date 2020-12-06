@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddRecordComponent } from './add-record/add-record.component';
 import { RecordListComponent } from './record-list/record-list.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddRecordComponent,
-    RecordListComponent
+    RecordListComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,
