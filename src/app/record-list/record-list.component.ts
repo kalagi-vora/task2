@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {RecordsService} from '../records.service';
 import { Record } from '../record.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-record-list',

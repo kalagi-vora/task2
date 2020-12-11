@@ -5,15 +5,15 @@
     <input type="hidden" name="reqType">
     <div class="form-group">
       <label for="firstName">First Name:</label>
-      <input type="text" id="firstName" class="form-control" formControlName="firstName">
+      <input type="text" id="firstName" class="form-control" formControlName="first_name">
     </div>
-    <span class="help-block" *ngIf="!recordForm.get('firstName').valid && recordForm.get('firstName').touched">please enter First Name</span>
+    <span class="help-block" *ngIf="!recordForm.get('first_name').valid && recordForm.get('first_name').touched">please enter First Name</span>
 
     <div class="form-group">
       <label for="lastName">Last Name:</label>
-      <input type="text" id="lastName" class="form-control" formControlName="lastName">
+      <input type="text" id="lastName" class="form-control" formControlName="last_name">
     </div>
-    <span class="help-block" *ngIf="!recordForm.get('lastName').valid && recordForm.get('lastName').touched" ngModel>please enter Last Name</span>
+    <span class="help-block" *ngIf="!recordForm.get('last_name').valid && recordForm.get('last_name').touched" ngModel>please enter Last Name</span>
 
     <br>
     <button class="btn btn-dark" type="submit" [disabled]= "recordForm.invalid">{{urlId? 'Update': 'Add'}}</button>

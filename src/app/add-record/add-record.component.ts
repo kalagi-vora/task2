@@ -33,18 +33,17 @@ export class AddRecordComponent implements OnInit{
     )
   }
 
-  InitForm()
-  {
-    let firstName:string ='';
-    let lastName : string ='';
+  private InitForm():void{
+    let first_name:string ='';
+    let last_name : string ='';
     if(this.urlId)
     {
-      firstName = this.dataOfRecord.first_name;
-      lastName = this.dataOfRecord.last_name;
+      first_name = this.dataOfRecord.first_name;
+      last_name = this.dataOfRecord.last_name;
     }
     this.recordForm = new FormGroup({
-      'firstName': new FormControl(firstName,Validators.required),
-      'lastName': new FormControl(lastName,Validators.required)
+      'first_name': new FormControl(first_name,Validators.required),
+      'last_name': new FormControl(last_name,Validators.required)
     })
   }
 
@@ -52,10 +51,10 @@ export class AddRecordComponent implements OnInit{
   onCreateRecord(recordData: Record): void{
     if(this.urlId)
     {
-      this.recordService.updateRecord(recordData.firstName, recordData.lastName ,recordData.id = this.dataOfRecord.id);
+      this.recordService.updateRecord(recordData.first_name, recordData.last_name ,recordData.id = this.dataOfRecord.id);
     }
     else{
-      this.recordService.createRecord(recordData.firstName, recordData.lastName);
+      this.recordService.createRecord(recordData.first_name, recordData.last_name);
     }
     this.router.navigate(['../recordlist']);
   }

@@ -13,7 +13,7 @@ export class RecordsService {
   constructor(private http : HttpClient) { }
 
   createRecord(firstName: string, lastName: string) {
-    const recordData: Record = { firstName: firstName, lastName: lastName };
+    const recordData: Record = { first_name: firstName, last_name: lastName };
     this.http
       .post<{ data: string }>(
         this.apiUrl,
@@ -28,7 +28,7 @@ export class RecordsService {
 
 
   updateRecord(firstName: string, lastName: string , id:number) {
-    const recordData: Record = { firstName: firstName, lastName: lastName};
+    const recordData: Record = { first_name: firstName, last_name: lastName};
     this.http
       .patch<{ data: string }>(
         `${this.apiUrl}/${id}`,
