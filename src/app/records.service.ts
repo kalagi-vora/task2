@@ -12,33 +12,22 @@ export class RecordsService {
 
   constructor(private http : HttpClient) { }
 
-  createRecord(firstName: string, lastName: string) {
-    const recordData: Record = { first_name: firstName, last_name: lastName };
-    this.http
+  createRecord(firstName: string, lastName: string, avatar: string) {
+    const recordData: Record = { first_name: firstName, last_name: lastName ,avatar : avatar};
+    return this.http
       .post<{ data: string }>(
         this.apiUrl,
         recordData
       )
-      .subscribe(
-        responseData => {
-          console.log("Record Is:" +JSON.stringify(responseData));
-        }
-      );
   }
 
-
-  updateRecord(firstName: string, lastName: string , id:number) {
-    const recordData: Record = { first_name: firstName, last_name: lastName};
-    this.http
+  updateRecord(firstName: string, lastName: string , avatar: string, id:number) {
+    const recordData: Record = { first_name: firstName, last_name: lastName, avatar : avatar};
+    return this.http
       .patch<{ data: string }>(
         `${this.apiUrl}/${id}`,
         recordData
       )
-      .subscribe(
-        responseData => {
-          console.log("Edited data Is:" +JSON.stringify(responseData));
-        }
-      );
   }
 
   passData(data: Record){

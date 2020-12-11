@@ -5,3 +5,11 @@ form{
 input.ng-invalid.ng-touched{
 	border: 1px solid red;
 }
+
+img{
+  max-height:100px;
+}
+
+span{
+  font-size: x-small;
+}

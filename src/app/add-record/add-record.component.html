@@ -1,5 +1,5 @@
 <div>
-  <h4>{{urlId? 'Edit User': 'Add User'}}</h4>
+  <h4>{{urlId==="new"? 'Add User': 'Edit User'}}</h4>
 
   <form [formGroup]="recordForm" (ngSubmit)="onCreateRecord(recordForm.value)">
     <input type="hidden" name="reqType">
@@ -13,10 +13,16 @@
       <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" class="form-control" formControlName="last_name">
     </div>
-    <span class="help-block" *ngIf="!recordForm.get('last_name').valid && recordForm.get('last_name').touched" ngModel>please enter Last Name</span>
+    <span class="help-block" *ngIf="!recordForm.get('last_name').valid && recordForm.get('last_name').touched">please enter Last Name</span>
+
+    <div class="form-group" *ngIf="urlId!=='new'">
+      <label for="avatar">Avatar:</label>
+      <br>
+      <img [src]="dataOfRecord.avatar" alt="{{dataOfRecord.first_name}}" class="img-responsive">
+    </div>
 
     <br>
-    <button class="btn btn-dark" type="submit" [disabled]= "recordForm.invalid">{{urlId? 'Update': 'Add'}}</button>
+    <button class="btn btn-dark" type="submit" [disabled]= "recordForm.invalid">{{urlId==="new"? 'Add': 'Edit'}}</button>
     <button class="btn btn-light" routerLink="/recordlist">Cancel</button>
 
   </form>

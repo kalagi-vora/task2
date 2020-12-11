@@ -14,7 +14,7 @@ export class AddRecordComponent implements OnInit{
 
   public recordForm: FormGroup;
   public dataOfRecord : Record;
-  public urlId = false;
+  public urlId: string;
 
   constructor(private recordService: RecordsService ,
               private route: ActivatedRoute,
@@ -27,7 +27,7 @@ export class AddRecordComponent implements OnInit{
 
     this.route.params.subscribe(
       (params : Params)=>{
-        this.urlId = params['id']? true : false;
+        this.urlId = params['id'];
         this.InitForm();
       }
     )
@@ -36,25 +36,28 @@ export class AddRecordComponent implements OnInit{
   private InitForm():void{
     let first_name:string ='';
     let last_name : string ='';
-    if(this.urlId)
+    if(this.urlId!=="new")
     {
       first_name = this.dataOfRecord.first_name;
       last_name = this.dataOfRecord.last_name;
     }
     this.recordForm = new FormGroup({
       'first_name': new FormControl(first_name,Validators.required),
-      'last_name': new FormControl(last_name,Validators.required)
+      'last_name': new FormControl(last_name,Validators.required),
     })
   }
 
-
   onCreateRecord(recordData: Record): void{
-    if(this.urlId)
+    if(this.urlId==="new")
     {
-      this.recordService.updateRecord(recordData.first_name, recordData.last_name ,recordData.id = this.dataOfRecord.id);
+      this.recordService.createRecord(recordData.first_name, recordData.last_name, recordData.avatar).subscribe(response =>{
+        console.log("created record is: " +JSON.stringify(response));
+      });
     }
     else{
-      this.recordService.createRecord(recordData.first_name, recordData.last_name);
+      this.recordService.updateRecord(recordData.first_name, recordData.last_name ,recordData.avatar, recordData.id = this.dataOfRecord.id).subscribe(response => {
+        console.log("Updated record is: " +JSON.stringify(response));
+      });
     }
     this.router.navigate(['../recordlist']);
   }

@@ -43,14 +43,13 @@ export class RecordListComponent implements OnInit {
 
   onClickEdit(data: Record){
     this.recordService.passData(data);
-    console.log("in component:"+JSON.stringify(this.recordService.showData()));
+    console.log("Original Data :"+JSON.stringify(this.recordService.showData()));
      this.router.navigate([`../recordlist/${data.id}`]);
   }
 
   onClickDelete(id: number){
 
-    let user = this.allRecords[id-1].first_name;
-    if (confirm(`Are you sure to delete user ${user}?`)){
+    if (confirm("Are you sure,you want to delete this user?")){
       this.recordService.deleteRecord(id).subscribe(() => {
         console.log(`Delete Request for id:${id} is successful`);
 
